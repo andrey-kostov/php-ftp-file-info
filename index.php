@@ -1,8 +1,12 @@
 <?php
 
+//НАПРАВИ ГО С КАЧВАНЕ НА ФАЙЛА В САМОТО ФТП
+
 $host= 'ftp.iron-devs.com';
 $user = 'teamiron@iron-devs.com';
 $password = '5YNvFOCA)4ji';
+
+$allowedExtensions = array('php','js','css','tpl','twig');
 
 $ftpConnection = ftp_connect($host);
 $ftpLogin = ftp_login($ftpConnection,$user,$password);
@@ -15,6 +19,7 @@ if ((!$ftpConnection) || (!$ftpLogin)) {
 }
 
 function changeDirectory ($dirName,$connection){
+
 
     //change directory
     ftp_chdir($connection, $dirName);
@@ -34,11 +39,23 @@ $all_paths = changeDirectory('public_html',$ftpConnection);
 //Get all items from the directory
 
 foreach ($all_paths as $path){
+    
     $pathInfo = pathinfo($path);
-    if(array_key_exists('extension', $pathInfo)){
-        var_dump($pathInfo);
-        echo 'File name - ' . $pathInfo['basename'] . ' - Last modified on - ' . filemtime($pathInfo['dirname'].$pathInfo['basename']) . ' Item Path - ' . $pathInfo['dirname'] . '<br>';
 
+    if(array_key_exists('extension', $pathInfo)){
+
+        if(in_array($pathInfo['extension'],  $allowedExtensions)){
+                echo '<pre>';
+                var_dump($_SERVER['DOCUMENT_ROOT']);
+                echo '</pre>';
+
+                $pathStats = stat($path);
+
+                echo 'File name - ' . $pathInfo['basename'] 
+                . ' - Last modified on - ' . date ("F d Y", $pathStats['mtime']) 
+                . ' Item Path - ' . $pathInfo['dirname'] . '<br>';
+            }
+            
     }else{
         echo '<br> <hr> this is a folder <hr> <br>';
     }
