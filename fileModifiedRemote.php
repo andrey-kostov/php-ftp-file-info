@@ -1,9 +1,9 @@
 <?php
 
 
-$host= 'ftp.iron-devs.com';
-$user = 'teamiron@iron-devs.com';
-$password = '5YNvFOCA)4ji';
+$host= '';
+$user = '';
+$password = '';
 
 $allowedExtensions = array('php','js','css','tpl','twig');
 
