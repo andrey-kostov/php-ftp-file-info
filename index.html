@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>FTP File List</title>
+    <!-- Include Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+
+<div class="container mt-5">
+    <h2>FTP File List</h2>
+    <form method="post" action="ftp_list.php">
+        <div class="form-group">
+            <label for="ftp_server">FTP Server:</label>
+            <input type="text" class="form-control" id="ftp_server" name="ftp_server" required>
+        </div>
+        <div class="form-group">
+            <label for="ftp_username">FTP Username:</label>
+            <input type="text" class="form-control" id="ftp_username" name="ftp_username" required>
+        </div>
+        <div class="form-group">
+            <label for="ftp_password">FTP Password:</label>
+            <input type="password" class="form-control" id="ftp_password" name="ftp_password" required>
+        </div>
+        <div class="form-group">
+            <label for="start_date">Start Date:</label>
+            <input type="date" class="form-control" id="start_date" name="start_date" required>
+        </div>
+        <div class="form-group">
+            <label for="end_date">End Date:</label>
+            <input type="date" class="form-control" id="end_date" name="end_date" required>
+        </div>
+        <button type="submit" class="btn btn-primary">List Files</button>
+    </form>
+</div>
+
+</body>
+</html>
