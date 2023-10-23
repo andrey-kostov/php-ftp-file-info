@@ -5,10 +5,11 @@ $ftp_username = $_POST['ftp_username'];
 $ftp_password = $_POST['ftp_password'];
 $start_date = strtotime($_POST['start_date']);
 $end_date = strtotime($_POST['end_date']);
+$directory = $_POST['directory']; // Get the directory name from the form input
 
-// Function to recursively list files in all folders and subfolders
+// Function to recursively list files in a specific directory and its subdirectories
 function listFilesRecursively($ftp_connection, $directory, $start_date, $end_date) {
-    // Change the working directory to the current directory
+    // Change the working directory to the specified directory
     ftp_chdir($ftp_connection, $directory);
 
     // Get a list of files and directories in the current directory
@@ -53,11 +54,10 @@ if (!$login_result) {
     die("Login failed.");
 }
 
-echo "<h2>Files modified between " . date('Y-m-d', $start_date) . " and " . date('Y-m-d', $end_date) . ":</h2>";
+echo "<h2>Files modified between " . date('Y-m-d', $start_date) . " and " . date('Y-m-d', $end_date) . " in directory: $directory</h2>";
 
-// Start the recursive search from the root directory (change this if necessary)
-$root_directory = '/';
-listFilesRecursively($ftp_connection, $root_directory, $start_date, $end_date);
+// Start the recursive search from the specified directory
+listFilesRecursively($ftp_connection, $directory, $start_date, $end_date);
 
 // Close the FTP connection
 ftp_close($ftp_connection);
